@@ -56,8 +56,8 @@ func TestMainHandlerWhenWrongCityValue(t *testing.T) {
 	require.Equal(t, http.StatusBadRequest, status)
 
 	// Check behaviour if requested city doesn't exist
-	noCity := "wrong city value"
+	wrongCity := "wrong city value"
 	resp := responseRecorder.Body.String()
 
-	assert.Equal(t, noCity, resp)
+	assert.Equal(t, wrongCity, resp)
 }
