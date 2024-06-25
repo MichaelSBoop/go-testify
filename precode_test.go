@@ -22,9 +22,10 @@ func TestMainHandlerWhenRequestCorrect(t *testing.T) {
 	require.Equal(t, http.StatusOK, status)
 
 	// Check for behaviour when request is correct
-	emptyResponse := ""
 	actualResponse := responseRecorder.Body.String()
-	assert.NotEqual(t, emptyResponse, actualResponse)
+	elementsCount := strings.Split(actualResponse, ",")
+	assert.NotEmpty(t, actualResponse)
+	assert.NotEmpty(t, len(elementsCount))
 }
 
 func TestMainHandlerWhenCountMoreThanTotal(t *testing.T) {
@@ -45,7 +46,7 @@ func TestMainHandlerWhenCountMoreThanTotal(t *testing.T) {
 }
 
 func TestMainHandlerWhenWrongCityValue(t *testing.T) {
-	req := httptest.NewRequest("GET", "/cafe?city=omsk&count=1", nil)
+	req := httptest.NewRequest("GET", "/cafe?city=aaaaaaaaa&count=1", nil)
 
 	responseRecorder := httptest.NewRecorder()
 	handler := http.HandlerFunc(mainHandle)
